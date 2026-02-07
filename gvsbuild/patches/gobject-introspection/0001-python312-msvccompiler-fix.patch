@@ -2,18 +2,32 @@ diff --git a/giscanner/msvccompiler.py b/giscanner/msvccompiler.py
 index c9f14b58..1c4bd9b3 100644
 --- a/giscanner/msvccompiler.py
 +++ b/giscanner/msvccompiler.py
-@@ -40,7 +40,13 @@ class MSVCCompiler(DistutilsMSVCCompiler):
- 
+@@ -33,7 +33,27 @@ class MSVCCompiler(DistutilsMSVCCompiler):
+
      def __init__(self, verbose=0, dry_run=0, force=0):
-         super(DistutilsMSVCCompiler, self).__init__()
 -        CCompiler.__init__(self, verbose, dry_run, force)
++        #
++        # Python 3.12 changed the CCompiler.__init__ signature.
++        # Older versions accept (verbose, dry_run, force)
++        # Python 3.12+ may accept only (verbose, dry_run) or even just (verbose).
++        #
++        # Try the old signature first, then gracefully fall back.
++        #
 +        try:
++            # Python 3.10–3.11
 +            CCompiler.__init__(self, verbose, dry_run, force)
 +        except TypeError:
-+            CCompiler.__init__(self,
-+                               verbose=verbose,
-+                               dry_run=dry_run,
-+                               force=force)
-         self.__paths = []
-         self.__arch = None  # deprecated name
-         self.initialized = False
++            try:
++                # Python 3.12 (setuptools._distutils) — no 'force'
++                CCompiler.__init__(self, verbose, dry_run)
++            except TypeError:
++                try:
++                    # Python 3.12 alternative — dry_run positional-only
++                    CCompiler.__init__(self, verbose)
++                except TypeError:
++                    # Absolute fallback — safest minimal call
++                    CCompiler.__init__(self)
+
+         self._paths = []
+         self._arch = None # deprecated name
+
