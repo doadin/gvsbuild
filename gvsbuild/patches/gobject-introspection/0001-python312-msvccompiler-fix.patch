@@ -1,7 +1,7 @@
 diff --git a/giscanner/msvccompiler.py b/giscanner/msvccompiler.py
 index c9f14b58..1c4bd9b3 100644
---- a/gvsbuild/patches/gobject-introspection/msvccompiler.py
-+++ b/gvsbuild/patches/gobject-introspection/msvccompiler.py
+--- a/giscanner/msvccompiler.py
++++ b/giscanner/msvccompiler.py
 @@ -40,7 +40,13 @@ class MSVCCompiler(DistutilsMSVCCompiler):
  
      def __init__(self, verbose=0, dry_run=0, force=0):
