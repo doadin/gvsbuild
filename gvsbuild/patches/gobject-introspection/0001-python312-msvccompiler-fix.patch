@@ -1,0 +1,16 @@
+diff --git a/giscanner/msvccompiler.py b/giscanner/msvccompiler.py
+index 1234567..abcdef0 100644
+--- a/giscanner/msvccompiler.py
++++ b/giscanner/msvccompiler.py
+@@ -40,7 +40,15 @@ class MSVCCompiler(CCompiler):
+     def __init__(self, verbose=0, dry_run=0, force=0):
+-        CCompiler.__init__(self, verbose, dry_run, force)
++        try:
++            # Python 3.10–3.11
++            CCompiler.__init__(self, verbose, dry_run, force)
++        except TypeError:
++            # Python 3.12+
++            CCompiler.__init__(self,
++                               verbose=verbose,
++                               dry_run=dry_run,
++                               force=force)
