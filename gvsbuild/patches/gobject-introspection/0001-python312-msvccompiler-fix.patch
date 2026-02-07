@@ -1,10 +1,11 @@
 diff --git a/giscanner/msvccompiler.py b/giscanner/msvccompiler.py
-index c9f14b58..1c4bd9b3 100644
+index c9f14b58..9635b27f 100644
 --- a/giscanner/msvccompiler.py
 +++ b/giscanner/msvccompiler.py
-@@ -33,7 +33,27 @@ class MSVCCompiler(DistutilsMSVCCompiler):
-
+@@ -40,7 +40,28 @@ class MSVCCompiler(DistutilsMSVCCompiler):
+ 
      def __init__(self, verbose=0, dry_run=0, force=0):
+         super(DistutilsMSVCCompiler, self).__init__()
 -        CCompiler.__init__(self, verbose, dry_run, force)
 +        #
 +        # Python 3.12 changed the CCompiler.__init__ signature.
@@ -27,7 +28,7 @@ index c9f14b58..1c4bd9b3 100644
 +                except TypeError:
 +                    # Absolute fallback — safest minimal call
 +                    CCompiler.__init__(self)
-
-         self._paths = []
-         self._arch = None # deprecated name
-
++
+         self.__paths = []
+         self.__arch = None  # deprecated name
+         self.initialized = False
