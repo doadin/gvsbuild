@@ -43,6 +43,7 @@ class GObjectIntrospection(Tarball, Meson):
             patches=[
                 # https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/427
                 "001-incorrect-giscanner-path.patch",
+                "0001-python312-msvccompiler-fix.patch",
             ],
         )
 

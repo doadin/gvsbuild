@@ -41,6 +41,7 @@ class GLibBase(Tarball, Meson):
             patches=[
                 "001-glib-package-installation-directory.patch",
                 "002-gtask-fix-g_task_run_in_thread.patch",
+                "003-fix-win-socket-errors.patch",
             ],
         )
         self.add_param("-Dman-pages=disabled")
@@ -72,6 +73,7 @@ class GLib(Tarball, Meson):
             patches=[
                 "001-glib-package-installation-directory.patch",
                 "002-gtask-fix-g_task_run_in_thread.patch",
+                "003-fix-win-socket-errors.patch",
             ],
         )
         self.add_param("-Dman-pages=disabled")
