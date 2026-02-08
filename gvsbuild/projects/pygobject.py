@@ -35,7 +35,7 @@ class PyGObject(Tarball, Meson):
             patches=[
                 "001-pygobject-py38-load-dll.patch",
                 # https://gitlab.gnome.org/GNOME/pygobject/-/merge_requests/463
-                "002-fix-syntax-error.patch",
+                #"002-fix-syntax-error.patch",
             ],
         )
 
